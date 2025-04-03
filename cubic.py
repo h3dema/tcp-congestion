@@ -18,8 +18,6 @@ class TCPCubic:
     C = 0.4  # CUBIC scaling factor
     BETA = 0.7  # Multiplicative decrease factor
 
-    CWND_MAX = 100  # Maximum congestion window (simulating bandwidth limit)
-    RTO_THRESHOLD = 3.0  # If no ACKs arrive for 3s, reset cwnd (RTO event)
 
     def __init__(self, cwnd=INITIAL_CWND, ssthresh=INITIAL_SSTHRESH):
         self.cwnd = cwnd  # Initial congestion window
@@ -29,6 +27,8 @@ class TCPCubic:
         self.start_time = None  # Start time of simulation
         self.last_ack_time = None  # Last received ACK time
         self.loss_event = False
+        self.CWND_MAX = 100  # Maximum congestion window (simulating bandwidth limit)
+        self.RTO_THRESHOLD = 3.0  # If no ACKs arrive for 3s, reset cwnd (RTO event)
         logging.debug(f"CUBIC initialized with cwnd={cwnd}, ssthresh={ssthresh}")
 
     def cubic_wnd(self, t):
@@ -75,3 +75,6 @@ class TCPCubic:
 
         # Update last ACK time
         self.last_ack_time = ack_time
+
+    def __repr__(self):
+        return f"TCPCubic(cwnd={self.cwnd}, ssthresh={self.ssthresh}"

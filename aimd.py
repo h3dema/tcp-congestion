@@ -16,8 +16,6 @@ class TCPAIMD:
     MSS = 1  # Maximum Segment Size
     BETA = 0.5  # Multiplicative decrease factor (50% reduction on loss)
 
-    CWND_MAX = 100  # Maximum congestion window (simulating bandwidth limit)
-    RTO_THRESHOLD = 3.0  # If no ACKs arrive for 3s, reset cwnd (RTO event)
 
     def __init__(self, cwnd=INITIAL_CWND, ssthresh=INITIAL_SSTHRESH):
         self.cwnd = cwnd  # Initial congestion window
@@ -26,6 +24,8 @@ class TCPAIMD:
         self.last_ack_time = None  # Last received ACK time
         self.loss_event = False
         self.in_slow_start = True  # Start in slow start phase
+        self.CWND_MAX = 100  # Maximum congestion window (simulating bandwidth limit)
+        self.RTO_THRESHOLD = 3.0  # If no ACKs arrive for 3s, reset cwnd (RTO event)
         logging.debug(f"AIMD initialized with cwnd={cwnd}, ssthresh={ssthresh}")
 
     def update_cwnd(self, ack_time, loss_event=False):
