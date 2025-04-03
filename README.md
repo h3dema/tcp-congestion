@@ -78,6 +78,13 @@ Reno modifies Multiplicative Decrease and part of Congestion Avoidance but not S
 - After receiving a new ACK for new data, Reno switches back to normal congestion avoidance.
 
 
+You can simulate it using the following command, which will generate the image below:
+```bash
+python simulation.py  --use-reno --seed 2 --num-acks 10000
+```
+<img src="images/reno.png" width="50%">
+
+
 ## TCP CUBIC
 
 TCP CUBIC is a modern alternative to TCP Reno. It is widely used today and it is the default in Linux.

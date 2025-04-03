@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 from cubic import TCPCubic
 from aimd import TCPAIMD
+from reno import TCPReno
 
 
 INITIAL_CWND = 1  # Initial congestion window
@@ -104,8 +105,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument('--use-aimd', action='store_true', help="Use AIMD congestion control")
-    group.add_argument('--use-cubic', action='store_true', help="Use Cubic congestion control")
+    group.add_argument('--use-aimd', action='store_true', help="Use TCP AIMD congestion control")
+    group.add_argument('--use-cubic', action='store_true', help="Use TCP Cubic congestion control")
+    group.add_argument('--use-reno', action='store_true', help="Use TCP Reno congestion control")
 
     parser.add_argument('--num-acks', type=int, default=10_000, help='Number of ACKs to simulate')
 
@@ -138,9 +140,15 @@ if __name__ == "__main__":
     if args.use_cubic:
         tcp = TCPCubic(cwnd=args.cwnd, ssthresh=args.ssthresh)
         method_name = 'TCP CUBIC'
+
+    elif args.use_reno:
+        tcp = TCPReno(cwnd=args.cwnd, ssthresh=args.ssthresh)
+        method_name = 'TCP Reno'
+
     elif args.use_aimd:
         tcp = TCPAIMD(cwnd=args.cwnd, ssthresh=args.ssthresh)
         method_name = 'TCP AIMD'
+
     else:
         raise NotImplementedError('Unknown congestion control method')
 
