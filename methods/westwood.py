@@ -9,6 +9,7 @@ keeps in the maximum value of ssthresh almost in all cases
 
 problem in `self.bw_est` or need to adjust `self.cwnd`
 
+ref. https://en.wikipedia.org/wiki/TCP_Westwood
 """
 
 import logging
