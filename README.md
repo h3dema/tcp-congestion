@@ -146,3 +146,10 @@ Unlike Reno, which always cuts $cwnd$ in half, CUBIC uses a more **adaptive** me
 (b) If the network can handle more traffic, it recovers more aggressively after loss.
 
 This allows faster recovery and better utilization of high-bandwidth networks, which is why CUBIC is used as the default TCP congestion control in Linux.
+
+
+---
+
+## References:
+- [TCP congestion control](https://en.wikipedia.org/wiki/TCP_congestion_control)
+- **Book**: Chapter 6 - [TCP Congestion Control](https://book.systemsapproach.org/congestion/tcpcc.html)
