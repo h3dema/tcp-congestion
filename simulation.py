@@ -3,9 +3,9 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 
-from cubic import TCPCubic
-from aimd import TCPAIMD
-from reno import TCPReno
+from methods.cubic import TCPCubic
+from methods.aimd import TCPAIMD
+from methods.reno import TCPReno
 
 
 INITIAL_CWND = 1  # Initial congestion window
