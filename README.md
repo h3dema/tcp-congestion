@@ -112,7 +112,7 @@ This allows for rapid growth when far from the last congestion event and smoothe
 
       $cwnd \leftarrow cwnd \times \beta$
 
-      where $beta$ is typically 0.7 (unlike Reno’s 0.5). At this point, CUBIC updates $W_{max}$, but how it does so depends on whether the congestion event suggests the network's available bandwidth has increased or not.
+      where $beta$ is typically 0.7 (unlike Reno’s $\beta = 0.5$). At this point, CUBIC updates $W_{max}$, but how it does so depends on whether the congestion event suggests the network's available bandwidth has increased or not.
 
     - **Updating $W_{max}$ after Multiplicative Decrease**
 
@@ -128,15 +128,21 @@ This allows for rapid growth when far from the last congestion event and smoothe
 
         This prevents CUBIC from blindly assuming the previous peak is still valid.
 
-### Why Does CUBIC Do This?
 
-Unlike Reno, which always cuts$cwnd$in half, CUBIC uses a more **adaptive** method: (a) If it hits a congestion limit multiple times, it **remembers** that limit and avoids being too aggressive; (b) If the network can handle more traffic, it recovers more aggressively after loss.
 
-This allows faster recovery and better utilization of high-bandwidth networks, which is why CUBIC is used as the default TCP congestion control in Linux.
-
+### Command
 
 You can simulate it using the following command, which will generate the image below:
 ```bash
 python simulation.py  --use-cubic --seed 2 --num-acks 10000
 ```
 <img src="images/cubic.png" width="50%">
+
+
+### Why does CUBIC do this?
+
+Unlike Reno, which always cuts $cwnd$ in half, CUBIC uses a more **adaptive** method:
+(a) If it hits a congestion limit multiple times, it **remembers** that limit and avoids being too aggressive; and
+(b) If the network can handle more traffic, it recovers more aggressively after loss.
+
+This allows faster recovery and better utilization of high-bandwidth networks, which is why CUBIC is used as the default TCP congestion control in Linux.
