@@ -20,9 +20,9 @@ class TCPReno:
         self.last_ack = None  # Track last ACK received
         self.in_slow_start = True
         self.in_fast_recovery = False
-        self.loss_event = False
         self.CWND_MAX = 100  # Maximum congestion window (simulating bandwidth limit)
         self.RTO_THRESHOLD = 3.0  # If no ACKs arrive for 3s, reset cwnd (RTO event)
+        self.loss_event = False
         logging.debug(f"RENO initialized with cwnd={cwnd}, ssthresh={ssthresh}")
 
     def update_cwnd(self, ack_time, loss_event=False, timeout=False, dup_ack=False):
