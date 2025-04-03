@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from methods.cubic import TCPCubic
 from methods.aimd import TCPAIMD
 from methods.reno import TCPReno
+from methods.westwood import TCPWestwood
 
 
 INITIAL_CWND = 1  # Initial congestion window
@@ -108,6 +109,7 @@ if __name__ == "__main__":
     group.add_argument('--use-aimd', action='store_true', help="Use TCP AIMD congestion control")
     group.add_argument('--use-cubic', action='store_true', help="Use TCP Cubic congestion control")
     group.add_argument('--use-reno', action='store_true', help="Use TCP Reno congestion control")
+    group.add_argument('--use-westwood', action='store_true', help="Use TCP Westwood congestion control")
 
     parser.add_argument('--num-acks', type=int, default=10_000, help='Number of ACKs to simulate')
 
@@ -140,6 +142,10 @@ if __name__ == "__main__":
     if args.use_cubic:
         tcp = TCPCubic(cwnd=args.cwnd, ssthresh=args.ssthresh)
         method_name = 'TCP CUBIC'
+
+    elif args.use_westwood:
+        tcp = TCPWestwood(cwnd=args.cwnd, ssthresh=args.ssthresh)
+        method_name = 'TCP Westwood'
 
     elif args.use_reno:
         tcp = TCPReno(cwnd=args.cwnd, ssthresh=args.ssthresh)
